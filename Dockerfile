@@ -1,4 +1,4 @@
-FROM iamliquidx/mirleechxsdk:21e1a2aa3057d82002a9a1962e14cd992a6f6d6a
+FROM iamliquidx/mirleechxsdk:a8ce33bccdde0806fbd0541d5faf33e63a572582
 
 WORKDIR /usr/src/app
 RUN chmod 777 /usr/src/app
@@ -12,6 +12,8 @@ RUN chmod +x /usr/local/bin/extract && chmod +x /usr/local/bin/pextract
 COPY . .
 COPY .netrc /root/.netrc
 RUN chmod 600 /usr/src/app/.netrc
-RUN chmod +x aria.sh
+RUN apt-get install -y wget 
+RUN wget -q https://github.com/P3TERX/aria2.conf/raw/master/dht.dat -O /usr/src/app/dht.dat && \
+    wget -q https://github.com/P3TERX/aria2.conf/raw/master/dht6.dat -O /usr/src/app/dht6.dat
 
 CMD ["bash","start.sh"]
